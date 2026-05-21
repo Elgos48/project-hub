@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Hub | Community Projects</title>
+    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <span class="logo">
+                <img src="assets/logo.png" alt="PH Logo">
+                PROJECT<span>HUB</span>
+            </span>
+            <button id="loginbtn" class="login-btn" onclick="window.location.href='./login.html'">Login</button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Explore, Build and Share</h1>
+        <p>Temukan ribuan proyek opensource dari komunitas teknologi.</p>
+        <button id="showFormBtn">Submit Your Project</button>
+    </header>
+
+    <main class="container">
+        <div id="modalOverlay" class="overlay">
+            <div class="modal">
+                <h2>Share New Project</h2>
+                <form id="projectForm">
+                    <input type="text" id="title" placeholder="Project Title" required>
+                    <textarea id="description" placeholder="Short description..." required></textarea>
+                    <input type="text" id="technology" placeholder="Software/Hardware used (comma separated)" required>
+                    <div class="file-inputs">
+                        <label>Thumbnail (Image):</label>
+                        <input type="file" id="imageInput" accept="image/*" required>
+                        <label>Source Code (ZIP):</label>
+                        <input type="file" id="codeInput" accept=".zip,.rar,.7z">
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" id="closeModal" class="cancel-btn">Cancel</button>
+                        <button type="submit" class="submit-btn">Publish Project</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="projectGrid" class="project-grid">
+            </div>
+    </main>
+
+
+
+    <script src="Script.js"></script>
+</body>
+</html>

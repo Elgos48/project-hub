@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | Project Hub</title>
+    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="Index.html" class="logo" style="text-decoration:none;">
+                <img src="assets/logo.png" alt="PH Logo">
+                PROJECT<span>HUB</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="login-card">
+            <h2>Register</h2>
+            <form id="registerForm" class="login-form">
+                <input id="username" type="text" placeholder="Username" required>
+                <input id="password" type="password" placeholder="Password" required>
+                <input id="confirmPassword" type="password" placeholder="Confirm Password" required>
+                <button type="submit" class="submit-btn">Register</button>
+            </form>
+            <p>Already have an account? <a href="login.html">Login here</a></p>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    alert('Registration successful! Please login.');
+                    window.location.href = 'login.html';
+                } else {
+                    alert('Registration failed: ' + (data.error || 'Please try again'));
+                }
+            } catch (error) {
+                console.error('Registration request failed:', error);
+                alert('Registration request failed: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Detail | Project Hub</title>
+    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="Index.html" class="logo" style="text-decoration:none;">
+                <img src="assets/logo.png" alt="PH Logo">
+                PROJECT<span>HUB</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div id="projectDetail">
+            <h1 id="detTitle">Memuat Proyek...</h1>
+            <p id="detAuthor"></p>
+            
+            <div class="detail-header">
+                <img id="detThumb" src="" alt="Thumbnail" class="main-img">
+            </div>
+
+            <div class="content-section">
+                <h2>Description</h2>
+                <p id="detDesc"></p>
+            </div>
+
+            <div class="content-section">
+                <h2>Technology</h2>
+                <p id="detTech"></p>
+            </div>
+
+            <div class="content-section">
+                <h2>Source Code</h2>
+                <div class="code-container">
+                    <pre><code id="detCode"></code></pre>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Script khusus halaman detail
+        document.addEventListener('DOMContentLoaded', () => {
+            const data = JSON.parse(localStorage.getItem('currentProject'));
+            
+            if (data) {
+                document.getElementById('detTitle').innerText = data.title;
+                document.getElementById('detThumb').src = data.imageUrl || data.image || '';
+                document.getElementById('detDesc').innerText = data.description || '';
+                document.getElementById('detTech').innerText = data.tech || data.tech_use || '';
+                document.getElementById('detCode').innerText = data.codeUrl || data.code || 'Source code tidak tersedia.';
+                document.getElementById('detAuthor').innerText = `by ${data.username || 'Unknown'}`;
+            } else {
+                document.getElementById('detTitle').innerText = "Proyek tidak ditemukan.";
+            }
+        });
+    </script>
+</body>
+</html>

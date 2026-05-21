@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Project Hub</title>
+    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="Index.html" class="logo" style="text-decoration:none;">
+                <img src="assets/logo.png" alt="PH Logo">
+                PROJECT<span>HUB</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="login-card">
+            <h2>Login</h2>
+            <form id="loginForm" class="login-form">
+                <input id="username" type="text" placeholder="Username" required>
+                <input id="password" type="password" placeholder="Password" required>
+                <button type="submit" class="submit-btn">Login</button>
+            </form>
+            <p>Don't have an account? <a href="Register.html">Register here</a></p>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+                if (response.ok && data.token) {
+                    localStorage.setItem('userToken', data.token);
+                    localStorage.setItem('userName', data.username);
+                    localStorage.setItem('userId', data.id);
+                    window.location.href = 'Index.html';
+                } else {
+                    alert('Login failed: ' + (data.error || 'Invalid credentials'));
+                }
+            } catch (error) {
+                console.error('Login request failed:', error);
+                alert('Login request failed: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
