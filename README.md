@@ -69,7 +69,6 @@ npm install
 Pastikan layanan database MySQL Anda (misal: XAMPP / Laragon) telah aktif. Akses perangkat administrasi database Anda (phpMyAdmin / HeidiSQL), buat database baru bernama projecthub, lalu eksekusi struktur DDL (Data Definition Language) berikut:
 
 ```SQL
-SQL
 CREATE DATABASE projecthub;
 USE projecthub;
 
@@ -102,7 +101,7 @@ Buat berkas baru .env di direktori root proyek (sejajar dengan server.js). Defin
 PORT=3000
 DB_HOST=localhost
 DB_USER=root
-DB_PASSWORD=masukkan_password_mysql_lokal_anda
+DB_PASSWORD=masukkan_password_mysql_lokal
 DB_NAME=projecthub
 JWT_SECRET=YOUR_RANDOM_KEY_STRING
 ```
